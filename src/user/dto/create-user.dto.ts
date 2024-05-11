@@ -1,14 +1,14 @@
-import { isEmail, isNotEmpty, maxLength, minLength } from "class-validator";
+import { IsEmail, IsNotEmpty, } from "class-validator";
 
 export class CreateUserDto {
-    /*@isEmail()
-    email: string 
-    @minLength(10,{
-        message: "minimo 10 caracteres"
+    @IsEmail({},{
+        message: "Formato de email invalido"
     })
-    @maxLength(15,{
-        message: "maximo 15 caracteres"
-    })
-    @isNotEmpty()
-    firstName: string */
+  email: string; 
+    @IsNotEmpty()
+    firstName: string;
+
+    @IsNotEmpty()
+    lastName: string;
+
 }

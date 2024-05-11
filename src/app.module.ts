@@ -2,17 +2,17 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {TypeOrmModule} from "@nestjs/typeorm";
-import { User } from './user/entities/user.entity';
+import { User, task_categories, task_status, tasks } from './user/entities/user.entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'mysql',
     host: 'localhost',
     port: 3306,
-    username: 'Armando',
+    username: 'root',
     password: '',
     database: 'apicul',
-    entities: [User],
+    entities: [User,tasks,task_categories,task_status],
     synchronize: true,
   }),],
   controllers: [AppController],

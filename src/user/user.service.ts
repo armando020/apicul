@@ -18,15 +18,21 @@ export class UserService {
     return this.UserRepository.find()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: number): Promise<User | null> {
+    return this.UserRepository.findOneBy({ id });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<User | null> {
+    const user = await this.UserRepository.findOne({ where: { id } });
+    if (!user) return null;
+    
+    Object.assign(user, updateUserDto);
+    await this.UserRepository.save(user);
+    
+    return user;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number): Promise<void> {
+    await this.UserRepository.delete(id);
   }
 }
